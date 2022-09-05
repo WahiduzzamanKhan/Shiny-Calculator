@@ -1,0 +1,34 @@
+.container {
+    height: 510px;
+    width: 235px;
+    background-color: #22252d;
+    border-radius: 15px;
+}
+
+.screen {
+    height: 205px;
+    width: 100%;
+}
+
+.keypad {
+    height: 305px;
+    width: 100%;
+    background-color: #2a2d37;
+    border-radius: 15px;
+    box-sizing: border-box;
+    padding: 10px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    column-gap: 10px;
+    row-gap: 10px;
+}
+
+.buttons {
+    color: #ffffff;
+    background-color: #282b33;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
