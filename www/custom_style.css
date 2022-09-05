@@ -1,3 +1,7 @@
+body {
+    font-family: 'Share Tech Mono', monospace;
+}
+
 .container {
     height: 510px;
     width: 235px;
@@ -24,11 +28,26 @@
     row-gap: 10px;
 }
 
-.buttons {
+.keypad-buttons {
     color: #ffffff;
-    background-color: #282b33;
-    
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background-color: #22252d;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 15px;
+
+    font-family: 'Share Tech Mono', monospace;
+}
+
+.keypad-buttons:active {
+    transform: scale(0.9);
+}
+
+.color1 {
+    color: #dd6b6b;
+    font-size: 25px;
+}
+
+.color2 {
+    color: #4fecd0;
 }
