@@ -221,7 +221,12 @@ server <- function(output, input, session) {
   observeEvent(
     input$equal,
     {
-      displayResult(format(eval(parse(text = operationStack())), big.mark = ",", scientific = FALSE))
+      tryCatch(
+        displayResult(format(eval(parse(text = operationStack())), big.mark = ",", scientific = FALSE)),
+        error = function(e){
+          displayResult("Syntax Error!")
+        }
+      )
       reset(TRUE)
     }
   )
