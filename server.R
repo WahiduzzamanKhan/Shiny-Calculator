@@ -148,6 +148,20 @@ server <- function(output, input, session) {
   )
 
   observeEvent(
+    input$point,
+    {
+      if(reset()){
+        operationStack(".")
+        displayOperation(".")
+        reset(FALSE)
+      } else {
+        operationStack(paste0(operationStack(), "."))
+        displayOperation(paste0(displayOperation(), "."))
+      }
+    }
+  )
+
+  observeEvent(
     input$plus,
     {
       if(reset()){
