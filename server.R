@@ -4,117 +4,203 @@ server <- function(output, input, session) {
   operationStack <- reactiveVal("")
   displayOperation <- reactiveVal("")
   displayResult <- reactiveVal("")
+  reset <- reactiveVal(FALSE)
 
   ################ listening to button clicks ################
   observeEvent(
     input$one,
     {
-      operationStack(paste0(operationStack(), "1"))
-      displayOperation(paste0(displayOperation(), "1"))
+      if(reset()){
+        operationStack("1")
+        displayOperation("1")
+        reset(FALSE)
+      } else {
+        operationStack(paste0(operationStack(), "1"))
+        displayOperation(paste0(displayOperation(), "1"))
+      }
     }
   )
 
   observeEvent(
     input$two,
     {
-      operationStack(paste0(operationStack(), "2"))
-      displayOperation(paste0(displayOperation(), "2"))
+      if(reset()){
+        operationStack("2")
+        displayOperation("2")
+        reset(FALSE)
+      } else {
+        operationStack(paste0(operationStack(), "2"))
+        displayOperation(paste0(displayOperation(), "2"))
+      }
     }
   )
 
   observeEvent(
     input$three,
     {
-      operationStack(paste0(operationStack(), "3"))
-      displayOperation(paste0(displayOperation(), "3"))
+      if(reset()){
+        operationStack("3")
+        displayOperation("3")
+        reset(FALSE)
+      } else {
+        operationStack(paste0(operationStack(), "3"))
+        displayOperation(paste0(displayOperation(), "3"))
+      }
     }
   )
 
   observeEvent(
     input$four,
     {
-      operationStack(paste0(operationStack(), "4"))
-      displayOperation(paste0(displayOperation(), "4"))
+      if(reset()){
+        operationStack("4")
+        displayOperation("4")
+        reset(FALSE)
+      } else {
+        operationStack(paste0(operationStack(), "4"))
+        displayOperation(paste0(displayOperation(), "4"))
+      }
     }
   )
 
   observeEvent(
     input$five,
     {
-      operationStack(paste0(operationStack(), "5"))
-      displayOperation(paste0(displayOperation(), "5"))
+      if(reset()){
+        operationStack("5")
+        displayOperation("5")
+        reset(FALSE)
+      } else {
+        operationStack(paste0(operationStack(), "5"))
+        displayOperation(paste0(displayOperation(), "5"))
+      }
     }
   )
 
   observeEvent(
     input$six,
     {
-      operationStack(paste0(operationStack(), "6"))
-      displayOperation(paste0(displayOperation(), "6"))
+      if(reset()){
+        operationStack("6")
+        displayOperation("6")
+        reset(FALSE)
+      } else {
+        operationStack(paste0(operationStack(), "6"))
+        displayOperation(paste0(displayOperation(), "6"))
+      }
     }
   )
 
   observeEvent(
     input$seven,
     {
-      operationStack(paste0(operationStack(), "7"))
-      displayOperation(paste0(displayOperation(), "7"))
+      if(reset()){
+        operationStack("7")
+        displayOperation("7")
+        reset(FALSE)
+      } else {
+        operationStack(paste0(operationStack(), "7"))
+        displayOperation(paste0(displayOperation(), "7"))
+      }
     }
   )
 
   observeEvent(
     input$eight,
     {
-      operationStack(paste0(operationStack(), "8"))
-      displayOperation(paste0(displayOperation(), "8"))
+      if(reset()){
+        operationStack("8")
+        displayOperation("8")
+        reset(FALSE)
+      } else {
+        operationStack(paste0(operationStack(), "8"))
+        displayOperation(paste0(displayOperation(), "8"))
+      }
     }
   )
 
   observeEvent(
     input$nine,
     {
-      operationStack(paste0(operationStack(), "9"))
-      displayOperation(paste0(displayOperation(), "9"))
+      if(reset()){
+        operationStack("9")
+        displayOperation("9")
+        reset(FALSE)
+      } else {
+        operationStack(paste0(operationStack(), "9"))
+        displayOperation(paste0(displayOperation(), "9"))
+      }
     }
   )
 
   observeEvent(
     input$zero,
     {
-      operationStack(paste0(operationStack(), "0"))
-      displayOperation(paste0(displayOperation(), "0"))
+      if(reset()){
+        operationStack("0")
+        displayOperation("0")
+        reset(FALSE)
+      } else {
+        operationStack(paste0(operationStack(), "0"))
+        displayOperation(paste0(displayOperation(), "0"))
+      }
     }
   )
 
   observeEvent(
     input$plus,
     {
-      operationStack(paste0(operationStack(), "  +  "))
-      displayOperation(paste0(displayOperation(), "  <span class = 'color1'>+</span>  "))
+      if(reset()){
+
+        operationStack( "  +  ")
+        displayOperation("  <span class = 'color1'>+</span>  ")
+        reset(FALSE)
+      } else {
+        operationStack(paste0(operationStack(), "  +  "))
+        displayOperation(paste0(displayOperation(), "  <span class = 'color1'>+</span>  "))
+      }
     }
   )
 
   observeEvent(
     input$minus,
     {
-      operationStack(paste0(operationStack(), "  -  "))
-      displayOperation(paste0(displayOperation(), "  <span class = 'color1'>-</span>  "))
+      if(reset()){
+        operationStack("  -  ")
+        displayOperation("  <span class = 'color1'>-</span>  ")
+        reset(FALSE)
+      } else {
+        operationStack(paste0(operationStack(), "  -  "))
+        displayOperation(paste0(displayOperation(), "  <span class = 'color1'>-</span>  "))
+      }
     }
   )
 
   observeEvent(
     input$multiply,
     {
-      operationStack(paste0(operationStack(), "  *  "))
-      displayOperation(paste0(displayOperation(), "  <span class = 'color1'>×</span>  "))
+      if(reset()){
+        operationStack("  *  ")
+        displayOperation("  <span class = 'color1'>×</span>  ")
+        reset(FALSE)
+      } else {
+        operationStack(paste0(operationStack(), "  *  "))
+        displayOperation(paste0(displayOperation(), "  <span class = 'color1'>×</span>  "))
+      }
     }
   )
 
   observeEvent(
     input$divide,
     {
-      operationStack(paste0(operationStack(), "  /  "))
-      displayOperation(paste0(displayOperation(), "  <span class = 'color1'>÷</span>  "))
+      if(reset()){
+        operationStack("  /  ")
+        displayOperation("  <span class = 'color1'>÷</span>  ")
+        reset(FALSE)
+      } else {
+        operationStack(paste0(operationStack(), "  /  "))
+        displayOperation(paste0(displayOperation(), "  <span class = 'color1'>÷</span>  "))
+      }
     }
   )
 
@@ -122,6 +208,7 @@ server <- function(output, input, session) {
     input$equal,
     {
       displayResult(format(eval(parse(text = operationStack())), big.mark = ",", scientific = FALSE))
+      reset(TRUE)
     }
   )
 
