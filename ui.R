@@ -1,6 +1,10 @@
 # defining the UI elements
 htmlTemplate(
   filename = "template.html",
+
+  operation = uiOutput("operation"),
+  result = uiOutput("result"),
+
   buttonAC = actionButton(inputId = "ac", label = "AC", class = "keypad-buttons color2"),
   buttonMemory = actionButton(inputId = "memory", label = "M±", class = "keypad-buttons color2"),
   buttonPercent = actionButton(inputId = "percent", label = "%", class = "keypad-buttons color2"),
