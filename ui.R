@@ -2,6 +2,8 @@
 htmlTemplate(
   filename = "template.html",
 
+  history = uiOutput("history"),
+
   operation = uiOutput("operation"),
   result = uiOutput("result"),
 

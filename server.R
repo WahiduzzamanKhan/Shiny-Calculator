@@ -2,6 +2,10 @@
 server <- function(output, input, session) {
   ################ reactive values to hold the current state of the calculator ################
   operationStack <- reactiveVal("")
+  historyStack <- reactiveValues(
+    operatoion = as.character(),
+    result = as.character()
+  )
   displayOperation <- reactiveVal("")
   displayResult <- reactiveVal("")
   reset <- reactiveVal(FALSE)
@@ -222,9 +226,27 @@ server <- function(output, input, session) {
     input$equal,
     {
       tryCatch(
-        displayResult(format(eval(parse(text = operationStack())), big.mark = ",", scientific = FALSE)),
+        {
+          result <- format(eval(parse(text = operationStack())), big.mark = ",", scientific = FALSE)
+          displayResult(result)
+          if(length(historyStack$operations) < 10) {
+            historyStack$operations <- append(historyStack$operations, displayOperation())
+            historyStack$result <- append(historyStack$result, result)
+          } else {
+            historyStack$operations <- append(historyStack$operations[2:9], displayOperation())
+            historyStack$result <- append(historyStack$result[2:9], result)
+          }
+        },
         error = function(e){
-          displayResult("Syntax Error!")
+          result <- "Syntax Error!"
+          displayResult(result)
+          if(length(historyStack$operations) < 10) {
+            historyStack$operations <- append(historyStack$operations, displayOperation())
+            historyStack$result <- append(historyStack$result, result)
+          } else {
+            historyStack$operations <- append(historyStack$operations[2:9], displayOperation())
+            historyStack$result <- append(historyStack$result[2:9], result)
+          }
         }
       )
       reset(TRUE)
@@ -237,6 +259,19 @@ server <- function(output, input, session) {
       operationStack("")
       displayOperation("")
       displayResult("")
+    }
+  )
+
+  observeEvent(
+    input$history,
+    {
+      output$history <- renderUI({
+        tagList(
+          HTML(historyStack$operations[length(historyStack$operations)]),
+          HTML("  <span class = 'color1'>=</span>  "),
+          HTML(historyStack$result[length(historyStack$result)])
+        )
+      })
     }
   )
 
