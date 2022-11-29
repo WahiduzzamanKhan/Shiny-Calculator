@@ -18,7 +18,10 @@
   --fs-symbol-keys: var(--fs-600);
   --fs-function-keys: var(--fs-500);
 
+  --size-400: 0.5rem;
   --size-500: 1rem;
+  --size-600: 1.25rem;
+  --size-700: 1.5rem;
 }
 
 /* Box sizing rules */
@@ -111,14 +114,49 @@ body {
 /* screen */
 .screen {
   min-height: 12.8125rem;
+  max-height: 12.8125rem;
   padding: var(--size-500);
   text-align: right;
+  overflow-y: scroll;
 
   display: grid;
-  grid-template-columns: 1fr;
-  row-gap: var(--size-500);
+  grid-template-rows: 1fr auto auto;
 }
 
+.screen::-webkit-scrollbar {
+  width: 8px;
+}
+.screen::-webkit-scrollbar-track {
+  background: transparent;
+}
+.screen::-webkit-scrollbar-thumb {
+  background: var(--clr-accent-400);
+  border-radius: 10px;
+}
+
+#history {
+  text-align: center;
+  position: relative;
+}
+
+.history-nav {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translate(-50%);
+}
+
+.history-nav-buttons {
+  color: var(--clr-accent-400);
+  background: var(--clr-primary-800);
+  font-size: var(--fs-500);
+  border: none;
+  border-radius: var(--size-500);
+  padding: 0.5rem var(--size-500);
+  cursor: pointer;
+}
+
+#history,
 #operation,
 #result {
   overflow-wrap: anywhere;
@@ -138,8 +176,8 @@ body {
   background: var(--clr-primary-800);
   font-size: var(--fs-500);
   border: none;
-  border-radius: 1.25rem;
-  padding: 1rem 1.5rem;
+  border-radius: var(--size-600);
+  padding: var(--size-500) var(--size-700);
   cursor: pointer;
 }
 
@@ -148,8 +186,8 @@ body {
   background: var(--clr-primary-800);
   font-size: var(--fs-600);
   border: none;
-  border-radius: 1.25rem;
-  padding: 0.5rem 1rem;
+  border-radius: var(--size-600);
+  padding: var(--size-400) var(--size-500);
   cursor: pointer;
 }
 
@@ -158,13 +196,14 @@ body {
   background: var(--clr-primary-800);
   font-size: var(--fs-500);
   border: none;
-  border-radius: 1.25rem;
-  padding: 0.5rem 1rem;
+  border-radius: var(--size-600);
+  padding: var(--size-400) var(--size-500);
   cursor: pointer;
 }
 
 .number-button:active,
 .symbol-button:active,
-.function-button:active {
+.function-button:active,
+.history-nav-buttons:active {
   transform: scale(0.95);
 }

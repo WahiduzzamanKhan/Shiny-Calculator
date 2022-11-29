@@ -4,7 +4,8 @@ server <- function(output, input, session) {
   operationStack <- reactiveVal("")
   historyStack <- reactiveValues(
     operatoion = as.character(),
-    result = as.character()
+    result = as.character(),
+    pointer = 0
   )
   displayOperation <- reactiveVal("")
   displayResult <- reactiveVal("")
@@ -14,6 +15,8 @@ server <- function(output, input, session) {
   observeEvent(
     input$one,
     {
+      output$history <- NULL # hide history if it was visible
+      historyStack$pointer <- length(historyStack$operations) # reset history pointer to the latest
       if(reset()){
         operationStack("1")
         displayOperation("1")
@@ -28,6 +31,8 @@ server <- function(output, input, session) {
   observeEvent(
     input$two,
     {
+      output$history <- NULL # hide history if it was visible
+      historyStack$pointer <- length(historyStack$operations) # reset history pointer to the latest
       if(reset()){
         operationStack("2")
         displayOperation("2")
@@ -42,6 +47,8 @@ server <- function(output, input, session) {
   observeEvent(
     input$three,
     {
+      output$history <- NULL # hide history if it was visible
+      historyStack$pointer <- length(historyStack$operations) # reset history pointer to the latest
       if(reset()){
         operationStack("3")
         displayOperation("3")
@@ -56,6 +63,8 @@ server <- function(output, input, session) {
   observeEvent(
     input$four,
     {
+      output$history <- NULL # hide history if it was visible
+      historyStack$pointer <- length(historyStack$operations) # reset history pointer to the latest
       if(reset()){
         operationStack("4")
         displayOperation("4")
@@ -70,6 +79,8 @@ server <- function(output, input, session) {
   observeEvent(
     input$five,
     {
+      output$history <- NULL # hide history if it was visible
+      historyStack$pointer <- length(historyStack$operations) # reset history pointer to the latest
       if(reset()){
         operationStack("5")
         displayOperation("5")
@@ -84,6 +95,8 @@ server <- function(output, input, session) {
   observeEvent(
     input$six,
     {
+      output$history <- NULL # hide history if it was visible
+      historyStack$pointer <- length(historyStack$operations) # reset history pointer to the latest
       if(reset()){
         operationStack("6")
         displayOperation("6")
@@ -98,6 +111,8 @@ server <- function(output, input, session) {
   observeEvent(
     input$seven,
     {
+      output$history <- NULL # hide history if it was visible
+      historyStack$pointer <- length(historyStack$operations) # reset history pointer to the latest
       if(reset()){
         operationStack("7")
         displayOperation("7")
@@ -112,6 +127,8 @@ server <- function(output, input, session) {
   observeEvent(
     input$eight,
     {
+      output$history <- NULL # hide history if it was visible
+      historyStack$pointer <- length(historyStack$operations) # reset history pointer to the latest
       if(reset()){
         operationStack("8")
         displayOperation("8")
@@ -126,6 +143,8 @@ server <- function(output, input, session) {
   observeEvent(
     input$nine,
     {
+      output$history <- NULL # hide history if it was visible
+      historyStack$pointer <- length(historyStack$operations) # reset history pointer to the latest
       if(reset()){
         operationStack("9")
         displayOperation("9")
@@ -140,6 +159,8 @@ server <- function(output, input, session) {
   observeEvent(
     input$zero,
     {
+      output$history <- NULL # hide history if it was visible
+      historyStack$pointer <- length(historyStack$operations) # reset history pointer to the latest
       if(reset()){
         operationStack("0")
         displayOperation("0")
@@ -154,6 +175,8 @@ server <- function(output, input, session) {
   observeEvent(
     input$point,
     {
+      output$history <- NULL # hide history if it was visible
+      historyStack$pointer <- length(historyStack$operations) # reset history pointer to the latest
       if(reset()){
         operationStack(".")
         displayOperation(".")
@@ -168,8 +191,9 @@ server <- function(output, input, session) {
   observeEvent(
     input$plus,
     {
+      output$history <- NULL # hide history if it was visible
+      historyStack$pointer <- length(historyStack$operations) # reset history pointer to the latest
       if(reset()){
-
         operationStack( "  +  ")
         displayOperation("  <span class = 'text-symbol'>+</span>  ")
         reset(FALSE)
@@ -183,6 +207,8 @@ server <- function(output, input, session) {
   observeEvent(
     input$minus,
     {
+      output$history <- NULL # hide history if it was visible
+      historyStack$pointer <- length(historyStack$operations) # reset history pointer to the latest
       if(reset()){
         operationStack("  -  ")
         displayOperation("  <span class = 'text-symbol'>-</span>  ")
@@ -197,6 +223,8 @@ server <- function(output, input, session) {
   observeEvent(
     input$multiply,
     {
+      output$history <- NULL # hide history if it was visible
+      historyStack$pointer <- length(historyStack$operations) # reset history pointer to the latest
       if(reset()){
         operationStack("  *  ")
         displayOperation("  <span class = 'text-symbol'>×</span>  ")
@@ -211,6 +239,8 @@ server <- function(output, input, session) {
   observeEvent(
     input$divide,
     {
+      output$history <- NULL # hide history if it was visible
+      historyStack$pointer <- length(historyStack$operations) # reset history pointer to the latest
       if(reset()){
         operationStack("  /  ")
         displayOperation("  <span class = 'text-symbol'>÷</span>  ")
@@ -225,6 +255,8 @@ server <- function(output, input, session) {
   observeEvent(
     input$equal,
     {
+      output$history <- NULL # hide history if it was visible
+      historyStack$pointer <- length(historyStack$operations) # reset history pointer to the latest
       tryCatch(
         {
           result <- format(eval(parse(text = operationStack())), big.mark = ",", scientific = FALSE)
@@ -259,23 +291,68 @@ server <- function(output, input, session) {
       operationStack("")
       displayOperation("")
       displayResult("")
+      output$history <- NULL # hide history if it was visible
+      historyStack$pointer <- length(historyStack$operations) # reset history pointer to the latest
     }
   )
 
   observeEvent(
     input$history,
     {
+      operationStack("")
+      displayOperation("")
+      displayResult("")
+      historyStack$pointer <- length(historyStack$operations)
       output$history <- renderUI({
         tagList(
-          HTML(historyStack$operations[length(historyStack$operations)]),
+          uiOutput("historyDisplay"),
+          div(
+            class = "history-nav",
+            actionButton(inputId = "historyPrev", label = NULL, icon = icon("caret-left"), class = "history-nav-buttons"),
+            actionButton(inputId = "historyNext", label = NULL, icon = icon("caret-right"), class = "history-nav-buttons")
+          )
+        )
+      })
+    }
+  )
+
+  observeEvent(
+    input$historyPrev,
+    {
+      historyStack$pointer <- ifelse(historyStack$pointer-1 != 0, historyStack$pointer-1, historyStack$pointer)
+      output$historyDisplay <- renderUI({
+        tagList(
+          HTML(historyStack$operations[historyStack$pointer]),
           HTML("  <span class = 'text-symbol'>=</span>  "),
-          HTML(historyStack$result[length(historyStack$result)])
+          HTML(historyStack$result[historyStack$pointer])
+        )
+      })
+    }
+  )
+
+  observeEvent(
+    input$historyNext,
+    {
+      historyStack$pointer <- ifelse(historyStack$pointer+1 <= length(historyStack$operations), historyStack$pointer+1, historyStack$pointer)
+      output$historyDisplay <- renderUI({
+        tagList(
+          HTML(historyStack$operations[historyStack$pointer]),
+          HTML("  <span class = 'text-symbol'>=</span>  "),
+          HTML(historyStack$result[historyStack$pointer])
         )
       })
     }
   )
 
   ################ rendering UI ################
+  output$historyDisplay <- renderUI({
+    tagList(
+      HTML(historyStack$operations[historyStack$pointer]),
+      HTML("  <span class = 'text-symbol'>=</span>  "),
+      HTML(historyStack$result[historyStack$pointer])
+    )
+  })
+
   output$operation <- renderUI({
     HTML(displayOperation())
   })
