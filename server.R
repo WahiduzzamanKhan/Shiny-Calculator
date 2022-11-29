@@ -354,7 +354,7 @@ server <- function(output, input, session) {
   )
 
   observeEvent(
-    input$history,
+    input$historyBtn,
     {
       # reset the display and operation stacks
       operationStack("")

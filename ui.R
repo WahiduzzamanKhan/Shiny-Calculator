@@ -23,7 +23,7 @@ htmlTemplate(
   buttonTwo = actionButton(inputId = "two", label = "2", class = "number-button"),
   buttonThree = actionButton(inputId = "three", label = "3", class = "number-button"),
   buttonPlus = actionButton(inputId = "plus", label = "+", class = "symbol-button"),
-  buttonHistory = actionButton(inputId = "history", label = "", icon = icon("rotate-left"), class = "function-button"),
+  buttonHistory = actionButton(inputId = "historyBtn", label = "", icon = icon("rotate-left"), class = "function-button"),
   buttonZero = actionButton(inputId = "zero", label = "0", class = "number-button"),
   buttonPoint = actionButton(inputId = "point", label = ".", class = "number-button"),
   buttonEqual = actionButton(inputId = "equal", label = "=", class = "symbol-button")
