@@ -1,15 +1,20 @@
 # defining the server logics
 server <- function(output, input, session) {
   ################ reactive values to hold the current state of the calculator ################
-  operationStack <- reactiveVal("")
+
+  operationStack <- reactiveVal("") # tracks the current operation
+
+  # store all the performed operation to be reviewed later
   historyStack <- reactiveValues(
-    operatoion = as.character(),
-    result = as.character(),
-    pointer = 0
+    operatoion = as.character(), # store the operations
+    result = as.character(), # store the results
+    pointer = 0 # track the point in history
   )
-  displayOperation <- reactiveVal("")
-  displayResult <- reactiveVal("")
-  reset <- reactiveVal(FALSE)
+
+  displayOperation <- reactiveVal("") # operation section of the display
+  displayResult <- reactiveVal("") # result section of the display
+
+  reset <- reactiveVal(FALSE) # clear the display when reset is TRUE
 
   ################ listening to button clicks ################
   observeEvent(
@@ -17,6 +22,9 @@ server <- function(output, input, session) {
     {
       output$history <- NULL # hide history if it was visible
       historyStack$pointer <- length(historyStack$operations) # reset history pointer to the latest
+
+      # if reset was TRUE, recreate the operation and display stack from beginning and set reset to FALSE
+      # else append to the current stack
       if(reset()){
         operationStack("1")
         displayOperation("1")
@@ -33,6 +41,9 @@ server <- function(output, input, session) {
     {
       output$history <- NULL # hide history if it was visible
       historyStack$pointer <- length(historyStack$operations) # reset history pointer to the latest
+
+      # if reset was TRUE, recreate the operation and display stack from beginning and set reset to FALSE
+      # else append to the current stack
       if(reset()){
         operationStack("2")
         displayOperation("2")
@@ -49,6 +60,9 @@ server <- function(output, input, session) {
     {
       output$history <- NULL # hide history if it was visible
       historyStack$pointer <- length(historyStack$operations) # reset history pointer to the latest
+
+      # if reset was TRUE, recreate the operation and display stack from beginning and set reset to FALSE
+      # else append to the current stack
       if(reset()){
         operationStack("3")
         displayOperation("3")
@@ -65,6 +79,9 @@ server <- function(output, input, session) {
     {
       output$history <- NULL # hide history if it was visible
       historyStack$pointer <- length(historyStack$operations) # reset history pointer to the latest
+
+      # if reset was TRUE, recreate the operation and display stack from beginning and set reset to FALSE
+      # else append to the current stack
       if(reset()){
         operationStack("4")
         displayOperation("4")
@@ -81,6 +98,9 @@ server <- function(output, input, session) {
     {
       output$history <- NULL # hide history if it was visible
       historyStack$pointer <- length(historyStack$operations) # reset history pointer to the latest
+
+      # if reset was TRUE, recreate the operation and display stack from beginning and set reset to FALSE
+      # else append to the current stack
       if(reset()){
         operationStack("5")
         displayOperation("5")
@@ -97,6 +117,9 @@ server <- function(output, input, session) {
     {
       output$history <- NULL # hide history if it was visible
       historyStack$pointer <- length(historyStack$operations) # reset history pointer to the latest
+
+      # if reset was TRUE, recreate the operation and display stack from beginning and set reset to FALSE
+      # else append to the current stack
       if(reset()){
         operationStack("6")
         displayOperation("6")
@@ -113,6 +136,9 @@ server <- function(output, input, session) {
     {
       output$history <- NULL # hide history if it was visible
       historyStack$pointer <- length(historyStack$operations) # reset history pointer to the latest
+
+      # if reset was TRUE, recreate the operation and display stack from beginning and set reset to FALSE
+      # else append to the current stack
       if(reset()){
         operationStack("7")
         displayOperation("7")
@@ -129,6 +155,9 @@ server <- function(output, input, session) {
     {
       output$history <- NULL # hide history if it was visible
       historyStack$pointer <- length(historyStack$operations) # reset history pointer to the latest
+
+      # if reset was TRUE, recreate the operation and display stack from beginning and set reset to FALSE
+      # else append to the current stack
       if(reset()){
         operationStack("8")
         displayOperation("8")
@@ -145,6 +174,9 @@ server <- function(output, input, session) {
     {
       output$history <- NULL # hide history if it was visible
       historyStack$pointer <- length(historyStack$operations) # reset history pointer to the latest
+
+      # if reset was TRUE, recreate the operation and display stack from beginning and set reset to FALSE
+      # else append to the current stack
       if(reset()){
         operationStack("9")
         displayOperation("9")
@@ -161,6 +193,9 @@ server <- function(output, input, session) {
     {
       output$history <- NULL # hide history if it was visible
       historyStack$pointer <- length(historyStack$operations) # reset history pointer to the latest
+
+      # if reset was TRUE, recreate the operation and display stack from beginning and set reset to FALSE
+      # else append to the current stack
       if(reset()){
         operationStack("0")
         displayOperation("0")
@@ -177,6 +212,9 @@ server <- function(output, input, session) {
     {
       output$history <- NULL # hide history if it was visible
       historyStack$pointer <- length(historyStack$operations) # reset history pointer to the latest
+
+      # if reset was TRUE, recreate the operation and display stack from beginning and set reset to FALSE
+      # else append to the current stack
       if(reset()){
         operationStack(".")
         displayOperation(".")
@@ -193,6 +231,9 @@ server <- function(output, input, session) {
     {
       output$history <- NULL # hide history if it was visible
       historyStack$pointer <- length(historyStack$operations) # reset history pointer to the latest
+
+      # if reset was TRUE, recreate the operation and display stack from beginning and set reset to FALSE
+      # else append to the current stack
       if(reset()){
         operationStack( "  +  ")
         displayOperation("  <span class = 'text-symbol'>+</span>  ")
@@ -209,6 +250,9 @@ server <- function(output, input, session) {
     {
       output$history <- NULL # hide history if it was visible
       historyStack$pointer <- length(historyStack$operations) # reset history pointer to the latest
+
+      # if reset was TRUE, recreate the operation and display stack from beginning and set reset to FALSE
+      # else append to the current stack
       if(reset()){
         operationStack("  -  ")
         displayOperation("  <span class = 'text-symbol'>-</span>  ")
@@ -225,6 +269,9 @@ server <- function(output, input, session) {
     {
       output$history <- NULL # hide history if it was visible
       historyStack$pointer <- length(historyStack$operations) # reset history pointer to the latest
+
+      # if reset was TRUE, recreate the operation and display stack from beginning and set reset to FALSE
+      # else append to the current stack
       if(reset()){
         operationStack("  *  ")
         displayOperation("  <span class = 'text-symbol'>×</span>  ")
@@ -241,6 +288,9 @@ server <- function(output, input, session) {
     {
       output$history <- NULL # hide history if it was visible
       historyStack$pointer <- length(historyStack$operations) # reset history pointer to the latest
+
+      # if reset was TRUE, recreate the operation and display stack from beginning and set reset to FALSE
+      # else append to the current stack
       if(reset()){
         operationStack("  /  ")
         displayOperation("  <span class = 'text-symbol'>÷</span>  ")
@@ -257,6 +307,11 @@ server <- function(output, input, session) {
     {
       output$history <- NULL # hide history if it was visible
       historyStack$pointer <- length(historyStack$operations) # reset history pointer to the latest
+
+      # when the "=" button is pressed, evaluate the operationStack
+      # if operation is valid, display result and then add the operation and the result to the historyStack
+      # else display "Syntax Error" and then add the operation and the result to the historyStack
+      # lastly, set the reset to TRUE, so that next key press clears the display and restarts the operationStack
       tryCatch(
         {
           result <- format(eval(parse(text = operationStack())), big.mark = ",", scientific = FALSE)
@@ -288,21 +343,28 @@ server <- function(output, input, session) {
   observeEvent(
     input$ac,
     {
+      output$history <- NULL # hide history if it was visible
+      historyStack$pointer <- length(historyStack$operations) # reset history pointer to the latest
+
+      # reset the display and operation stacks
       operationStack("")
       displayOperation("")
       displayResult("")
-      output$history <- NULL # hide history if it was visible
-      historyStack$pointer <- length(historyStack$operations) # reset history pointer to the latest
     }
   )
 
   observeEvent(
     input$history,
     {
+      # reset the display and operation stacks
       operationStack("")
       displayOperation("")
       displayResult("")
+
+      # set the history pointer to the latest
       historyStack$pointer <- length(historyStack$operations)
+
+      # render the history view
       output$history <- renderUI({
         tagList(
           uiOutput("historyDisplay"),
@@ -319,7 +381,10 @@ server <- function(output, input, session) {
   observeEvent(
     input$historyPrev,
     {
+      # set history pointer to one step back unless it is already the oldest
       historyStack$pointer <- ifelse(historyStack$pointer-1 != 0, historyStack$pointer-1, historyStack$pointer)
+
+      # update the history view with new pointer
       output$historyDisplay <- renderUI({
         tagList(
           HTML(historyStack$operations[historyStack$pointer]),
@@ -333,7 +398,10 @@ server <- function(output, input, session) {
   observeEvent(
     input$historyNext,
     {
+      # set history pointer to one step back unless it is already the latest
       historyStack$pointer <- ifelse(historyStack$pointer+1 <= length(historyStack$operations), historyStack$pointer+1, historyStack$pointer)
+
+      # update the history view with new pointer
       output$historyDisplay <- renderUI({
         tagList(
           HTML(historyStack$operations[historyStack$pointer]),
