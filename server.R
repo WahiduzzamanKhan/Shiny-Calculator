@@ -171,11 +171,11 @@ server <- function(output, input, session) {
       if(reset()){
 
         operationStack( "  +  ")
-        displayOperation("  <span class = 'color1'>+</span>  ")
+        displayOperation("  <span class = 'text-symbol'>+</span>  ")
         reset(FALSE)
       } else {
         operationStack(paste0(operationStack(), "  +  "))
-        displayOperation(paste0(displayOperation(), "  <span class = 'color1'>+</span>  "))
+        displayOperation(paste0(displayOperation(), "  <span class = 'text-symbol'>+</span>  "))
       }
     }
   )
@@ -185,11 +185,11 @@ server <- function(output, input, session) {
     {
       if(reset()){
         operationStack("  -  ")
-        displayOperation("  <span class = 'color1'>-</span>  ")
+        displayOperation("  <span class = 'text-symbol'>-</span>  ")
         reset(FALSE)
       } else {
         operationStack(paste0(operationStack(), "  -  "))
-        displayOperation(paste0(displayOperation(), "  <span class = 'color1'>-</span>  "))
+        displayOperation(paste0(displayOperation(), "  <span class = 'text-symbol'>-</span>  "))
       }
     }
   )
@@ -199,11 +199,11 @@ server <- function(output, input, session) {
     {
       if(reset()){
         operationStack("  *  ")
-        displayOperation("  <span class = 'color1'>×</span>  ")
+        displayOperation("  <span class = 'text-symbol'>×</span>  ")
         reset(FALSE)
       } else {
         operationStack(paste0(operationStack(), "  *  "))
-        displayOperation(paste0(displayOperation(), "  <span class = 'color1'>×</span>  "))
+        displayOperation(paste0(displayOperation(), "  <span class = 'text-symbol'>×</span>  "))
       }
     }
   )
@@ -213,11 +213,11 @@ server <- function(output, input, session) {
     {
       if(reset()){
         operationStack("  /  ")
-        displayOperation("  <span class = 'color1'>÷</span>  ")
+        displayOperation("  <span class = 'text-symbol'>÷</span>  ")
         reset(FALSE)
       } else {
         operationStack(paste0(operationStack(), "  /  "))
-        displayOperation(paste0(displayOperation(), "  <span class = 'color1'>÷</span>  "))
+        displayOperation(paste0(displayOperation(), "  <span class = 'text-symbol'>÷</span>  "))
       }
     }
   )
@@ -268,7 +268,7 @@ server <- function(output, input, session) {
       output$history <- renderUI({
         tagList(
           HTML(historyStack$operations[length(historyStack$operations)]),
-          HTML("  <span class = 'color1'>=</span>  "),
+          HTML("  <span class = 'text-symbol'>=</span>  "),
           HTML(historyStack$result[length(historyStack$result)])
         )
       })

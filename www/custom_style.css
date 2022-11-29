@@ -1,82 +1,170 @@
+:root {
+  --clr-primary-800: #2a2d37;
+  --clr-primary-900: #22252d;
+
+  --clr-neutral-100: #ffffff;
+
+  --clr-accent-400: #4fecd0;
+  --clr-accent-500: #dd6b6b;
+
+  --ff-primary: "Share Tech Mono", monospace;
+
+  --fw-regular: 500;
+
+  --fs-500: 1rem;
+  --fs-600: 1.5rem;
+
+  --fs-num-keys: var(--fs-500);
+  --fs-symbol-keys: var(--fs-600);
+  --fs-function-keys: var(--fs-500);
+
+  --size-500: 1rem;
+}
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+* {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+html,
 body {
-    font-family: 'Share Tech Mono', monospace;
+  height: 100%;
+}
+
+/* Set core body defaults */
+body {
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture,
+svg {
+  max-width: 100%;
+  display: block;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* general styling */
+body {
+  font-family: var(--ff-primary);
+  font-size: var(--fs-500);
+  color: var(--clr-neutral-100);
 }
 
 .container {
-    width: 235px;
-    background-color: #22252d;
-    border-radius: 15px;
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  width: 36ch;
+  background-color: var(--clr-primary-900);
+  border-radius: var(--size-500);
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.keypad {
-    height: 305px;
-    width: 100%;
-    background-color: #2a2d37;
-    border-radius: 15px;
-    box-sizing: border-box;
-    padding: 10px;
-
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    column-gap: 10px;
-    row-gap: 10px;
+.text-symbol {
+  color: var(--clr-accent-500);
 }
 
-.keypad-buttons {
-    color: #ffffff;
-    background-color: #22252d;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 15px;
-
-    font-family: 'Share Tech Mono', monospace;
-}
-
-.keypad-buttons:active {
-    transform: scale(0.9);
-}
-
-.color1 {
-    color: #dd6b6b;
-    font-size: 25px;
-}
-
-.color2 {
-    color: #4fecd0;
-}
-
+/* screen */
 .screen {
-    min-height: 205px;
-    width: 100%;
+  min-height: 12.8125rem;
+  padding: var(--size-500);
+  text-align: right;
 
-    box-sizing: border-box;
-    padding: 10px;
-    text-align: right;
-
-    display: grid;
-    grid-template-columns: 1fr;
-    row-gap: 10px;
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: var(--size-500);
 }
 
-#operation {
-    color: #ffffff;
-    align-self: end;
-    overflow-wrap: anywhere;
-    vertical-align: middle;
-}
-
-#operation > .color1 {
-    vertical-align: middle;
-}
-
+#operation,
 #result {
-    color: #ffffff;
-    font-size: 30px;
-    overflow-wrap: anywhere;
+  overflow-wrap: anywhere;
+}
+
+/* keypad */
+.keypad {
+  padding: var(--size-500);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  column-gap: var(--size-500);
+  row-gap: var(--size-500);
+}
+
+.number-button {
+  color: var(--clr-neutral-100);
+  background: var(--clr-primary-800);
+  font-size: var(--fs-500);
+  border: none;
+  border-radius: 1.25rem;
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+}
+
+.symbol-button {
+  color: var(--clr-accent-500);
+  background: var(--clr-primary-800);
+  font-size: var(--fs-600);
+  border: none;
+  border-radius: 1.25rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.function-button {
+  color: var(--clr-accent-400);
+  background: var(--clr-primary-800);
+  font-size: var(--fs-500);
+  border: none;
+  border-radius: 1.25rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.number-button:active,
+.symbol-button:active,
+.function-button:active {
+  transform: scale(0.95);
 }
