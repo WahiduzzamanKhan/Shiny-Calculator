@@ -232,11 +232,12 @@ server <- function(output, input, session) {
       output$history <- NULL # hide history if it was visible
       historyStack$pointer <- length(historyStack$operations) # reset history pointer to the latest
 
-      # if reset was TRUE, recreate the operation and display stack from beginning and set reset to FALSE
+      # if reset was TRUE, recreate the operation and display stack from beginning
+      # append the result from the last operation and then append the operator to the stack
       # else append to the current stack
       if(reset()){
-        operationStack( "  +  ")
-        displayOperation("  <span class = 'text-symbol'>+</span>  ")
+        operationStack(paste0(historyStack$result[length(historyStack$result)], "  +  "))
+        displayOperation(paste0(historyStack$result[length(historyStack$result)], "  <span class = 'text-symbol'>+</span>  "))
         reset(FALSE)
       } else {
         operationStack(paste0(operationStack(), "  +  "))
@@ -251,11 +252,12 @@ server <- function(output, input, session) {
       output$history <- NULL # hide history if it was visible
       historyStack$pointer <- length(historyStack$operations) # reset history pointer to the latest
 
-      # if reset was TRUE, recreate the operation and display stack from beginning and set reset to FALSE
+      # if reset was TRUE, recreate the operation and display stack from beginning
+      # append the result from the last operation and then append the operator to the stack
       # else append to the current stack
       if(reset()){
-        operationStack("  -  ")
-        displayOperation("  <span class = 'text-symbol'>-</span>  ")
+        operationStack(paste0(historyStack$result[length(historyStack$result)], "  -  "))
+        displayOperation(paste0(historyStack$result[length(historyStack$result)], "  <span class = 'text-symbol'>-</span>  "))
         reset(FALSE)
       } else {
         operationStack(paste0(operationStack(), "  -  "))
@@ -270,11 +272,12 @@ server <- function(output, input, session) {
       output$history <- NULL # hide history if it was visible
       historyStack$pointer <- length(historyStack$operations) # reset history pointer to the latest
 
-      # if reset was TRUE, recreate the operation and display stack from beginning and set reset to FALSE
+      # if reset was TRUE, recreate the operation and display stack from beginning
+      # append the result from the last operation and then append the operator to the stack
       # else append to the current stack
       if(reset()){
-        operationStack("  *  ")
-        displayOperation("  <span class = 'text-symbol'>×</span>  ")
+        operationStack(paste0(historyStack$result[length(historyStack$result)], "  ×  "))
+        displayOperation(paste0(historyStack$result[length(historyStack$result)], "  <span class = 'text-symbol'>×</span>  "))
         reset(FALSE)
       } else {
         operationStack(paste0(operationStack(), "  *  "))
@@ -289,11 +292,12 @@ server <- function(output, input, session) {
       output$history <- NULL # hide history if it was visible
       historyStack$pointer <- length(historyStack$operations) # reset history pointer to the latest
 
-      # if reset was TRUE, recreate the operation and display stack from beginning and set reset to FALSE
+      # if reset was TRUE, recreate the operation and display stack from beginning
+      # append the result from the last operation and then append the operator to the stack
       # else append to the current stack
       if(reset()){
-        operationStack("  /  ")
-        displayOperation("  <span class = 'text-symbol'>÷</span>  ")
+        operationStack(paste0(historyStack$result[length(historyStack$result)], "  /  "))
+        displayOperation(paste0(historyStack$result[length(historyStack$result)], "  <span class = 'text-symbol'>÷</span>  "))
         reset(FALSE)
       } else {
         operationStack(paste0(operationStack(), "  /  "))
@@ -350,6 +354,23 @@ server <- function(output, input, session) {
       operationStack("")
       displayOperation("")
       displayResult("")
+    }
+  )
+
+  observeEvent(
+    input$delete,
+    {
+      output$history <- NULL # hide history if it was visible
+      historyStack$pointer <- length(historyStack$operations) # reset history pointer to the latest
+
+      # remove the last block of digits or the last operation from the opration and display stack
+      operationTemp <- operationStack()
+      displayTemp <- displayOperation()
+      operationStack(str_remove(operationTemp, "([[:digit:]]| +[+\\-*\\/] +)$"))
+      displayOperation(str_remove(displayTemp, "([[:digit:]]|(  <span class = 'text-symbol'>[+÷\\-×\\/]<\\/span>  ))$"))
+
+      # set reset to FALSE so that other key press don't reset the operation and display stacks
+      reset(FALSE)
     }
   )
 

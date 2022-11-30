@@ -8,7 +8,7 @@ htmlTemplate(
   result = uiOutput("result"),
 
   buttonAC = actionButton(inputId = "ac", label = "AC", class = "function-button"),
-  buttonMemory = actionButton(inputId = "memory", label = "M±", class = "function-button"),
+  buttonDelete = actionButton(inputId = "delete", label = NULL, icon = icon("delete-left"), class = "symbol-button"),
   buttonPercent = actionButton(inputId = "percent", label = "%", class = "function-button"),
   buttonDivide = actionButton(inputId = "divide", label = "÷", class = "symbol-button"),
   buttonSeven = actionButton(inputId = "seven", label = "7", class = "number-button"),
