@@ -1,3 +1,9 @@
+// disabling tab key navigation
+document.querySelectorAll('button').forEach(elem => {
+    elem.setAttribute('tabindex', '-1')
+  });
+
+// enabling custom key bindings
 Mousetrap.bind('0', function() { document.getElementById('zero').click() });
 Mousetrap.bind('1', function() { document.getElementById('one').click() });
 Mousetrap.bind('2', function() { document.getElementById('two').click() });
