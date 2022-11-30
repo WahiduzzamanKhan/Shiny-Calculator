@@ -375,6 +375,29 @@ server <- function(output, input, session) {
   )
 
   observeEvent(
+    input$percent,
+    {
+      output$history <- NULL # hide history if it was visible
+      historyStack$pointer <- length(historyStack$operations) # reset history pointer to the latest
+
+      # if the stack is not empty, replace the last number of the stack with the result of dividing the last number by 100
+      if(operationStack()!="") {
+        operationTemp <- operationStack()
+        displayTemp <- displayOperation()
+
+        lastNumber <- str_extract(operationTemp, "[[:digit:]]+$")
+
+        if(!is.na(lastNumber)) {
+          percent <- as.numeric(lastNumber)/100
+
+          operationStack(str_replace(operationTemp, "[[:digit:]]+$", as.character(percent)))
+          displayOperation(str_replace(displayTemp, "[[:digit:]]+$", as.character(percent)))
+        }
+      }
+    }
+  )
+
+  observeEvent(
     input$historyBtn,
     {
       # reset the display and operation stacks
