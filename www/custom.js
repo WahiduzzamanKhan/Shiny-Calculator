@@ -24,3 +24,5 @@ Mousetrap.bind('esc', function() { document.getElementById('ac').click() });
 Mousetrap.bind(['command+shift+h', 'ctrl+shift+h'], function() { document.getElementById('historyBtn').click() });
 Mousetrap.bind('left', function() { document.getElementById('historyPrev').click() });
 Mousetrap.bind('right', function() { document.getElementById('historyNext').click() });
+Mousetrap.bind('backspace', function() { document.getElementById('delete').click() });
+Mousetrap.bind('%', function() { document.getElementById('percent').click() });
