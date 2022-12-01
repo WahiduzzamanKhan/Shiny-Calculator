@@ -366,8 +366,8 @@ server <- function(output, input, session) {
       # remove the last block of digits or the last operation from the opration and display stack
       operationTemp <- operationStack()
       displayTemp <- displayOperation()
-      operationStack(str_remove(operationTemp, "([[:digit:]]| +[+\\-*\\/] +)$"))
-      displayOperation(str_remove(displayTemp, "([[:digit:]]|(  <span class = 'text-symbol'>[+÷\\-×\\/]<\\/span>  ))$"))
+      operationStack(str_remove(operationTemp, "(([[:digit:]]|\\.)| +[+\\-*\\/] +)$"))
+      displayOperation(str_remove(displayTemp, "(([[:digit:]]|\\.)|(  <span class = 'text-symbol'>[+÷\\-×\\/]<\\/span>  ))$"))
 
       # set reset to FALSE so that other key press don't reset the operation and display stacks
       reset(FALSE)
@@ -385,13 +385,13 @@ server <- function(output, input, session) {
         operationTemp <- operationStack()
         displayTemp <- displayOperation()
 
-        lastNumber <- str_extract(operationTemp, "[[:digit:]]+$")
+        lastNumber <- str_extract(operationTemp, "\\d*\\.?\\d*$")
 
         if(!is.na(lastNumber)) {
           percent <- as.numeric(lastNumber)/100
 
-          operationStack(str_replace(operationTemp, "[[:digit:]]+$", as.character(percent)))
-          displayOperation(str_replace(displayTemp, "[[:digit:]]+$", as.character(percent)))
+          operationStack(str_replace(operationTemp, "\\d*\\.?\\d*$", as.character(percent)))
+          displayOperation(str_replace(displayTemp, "\\d*\\.?\\d*$", as.character(percent)))
         }
       }
     }
